@@ -10,7 +10,8 @@ import java.util.ArrayList;
 
 @WebServlet(name = "SinhVienServlet", value = {
         "/sinh-vien/hien-thi",
-        "/sinh-vien/detail"
+        "/sinh-vien/detail",
+        "/sinh-vien/add",
 })
 public class SinhVienServlet extends HttpServlet {
     ArrayList<SinhVien> listSinhVien = new ArrayList<>();
@@ -42,12 +43,28 @@ public class SinhVienServlet extends HttpServlet {
                 }
             }
             request.setAttribute("sinhVien", sinhVienDetail);
+            request.setAttribute("dslh", dslh);
             request.getRequestDispatcher("/detail.jsp").forward(request, response);
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("Da chay vao post");
+        String uri = request.getRequestURI();
+        if (uri.contains("/add")) {
+            // bước 1: lấy thông tin trên form xuống
+            String id = request.getParameter("id");
+            String hoTen = request.getParameter("hoTen");
+            String diaChi = request.getParameter("diaChi");
+            String lop = request.getParameter("lop");
+            String gioiTinh = request.getParameter("gioiTinh");
+            // bước 2 tạo đối tượng từ thông tin vừa lấy
+            SinhVien sinhVien = new SinhVien(id, hoTen, diaChi, gioiTinh, lop);
+            // bước 3: add đối tượng vào danh sách
+            listSinhVien.add(sinhVien);
+            // bước 4 quay lại hiển thị
+            response.sendRedirect("/sinh-vien/hien-thi");
+        }
+
     }
 }

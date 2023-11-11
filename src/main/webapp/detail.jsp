@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
@@ -31,7 +32,7 @@
     <div class="mb-3">
         <label class="form-label">Lop</label>
         <select class="form-select" aria-label="Default select example">
-            <c:forEach items="${lops}" var="i">
+            <c:forEach items="${dslh}" var="i">
                 <option value="${i}">${i}</option>
             </c:forEach>
 

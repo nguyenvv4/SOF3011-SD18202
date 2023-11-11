@@ -14,39 +14,37 @@
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
-<form>
+<form action="/sinh-vien/add" method="post">
     <div class="mb-3">
         <label class="form-label">ID</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" name="id">
     </div>
 
     <div class="mb-3">
         <label class="form-label">Ho Ten</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" name="hoTen">
     </div>
     <div class="mb-3">
         <label class="form-label">Dia Chi</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" name="diaChi">
     </div>
     <div class="mb-3">
         <label class="form-label">Lop</label>
-        <select class="form-select" aria-label="Default select example">
+        <select class="form-select" aria-label="Default select example" name="lop">
             <c:forEach items="${dslh}" var="i">
                 <option value="${i}">${i}</option>
             </c:forEach>
-
         </select>
     </div>
     <div class="mb-3">
         <label class="form-label">Giới tính</label>
         <br>
-        <input type="radio" id="contactChoice1" name="contact" value="Nam"/>
+        <input type="radio" id="contactChoice1" name="gioiTinh" value="Nam"/>
         <label for="contactChoice1">Nam</label>
 
-        <input type="radio" id="contactChoice2" name="contact" value="Nu"/>
+        <input type="radio" id="contactChoice2" name="gioiTinh" value="Nu"/>
         <label for="contactChoice2">Nu</label>
     </div>
-
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 <p>Danh sach sinh vien</p>
