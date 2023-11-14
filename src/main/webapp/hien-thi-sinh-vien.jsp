@@ -13,7 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
-<body>
+<body class="container">
 <form action="/sinh-vien/add" method="post">
     <div class="mb-3">
         <label class="form-label">ID</label>
@@ -69,11 +69,26 @@
             <td>${sinhVien.diaChi}</td>
             <td>${sinhVien.gioiTinh}</td>
             <td>${sinhVien.lop}</td>
-            <td><a href="/sinh-vien/detail?id=${sinhVien.id}" class="btn btn-primary">Detail</a></td>
+            <td><a href="/sinh-vien/detail?id=${sinhVien.id}" class="btn btn-primary">Detail</a>
+                <a href="/sinh-vien/delete?vitri=${i.index}" class="btn btn-primary">Xoa</a></td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
 
+<div class="row">
+    <c:forEach varStatus="i" items="${listSinhVien}" var="sinhVien">
+        <div class="col-md-3">
+            <div class="thumbnail">
+                <a href="/w3images/lights.jpg">
+                    <img src="https://product.hstatic.net/1000253775/product/7_0dc9fb936e3c477eaa7ead5ff5f933eb_grande.jpg" alt="Lights" style="width:100%">
+                    <div class="caption">
+                        <p>${sinhVien.ten}</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </c:forEach>
+</div>
 </body>
 </html>

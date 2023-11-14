@@ -31,4 +31,6 @@ public class SinhVien {
         this.gioiTinh = gioiTinh;
         this.lop = lop;
     }
+
+
 }

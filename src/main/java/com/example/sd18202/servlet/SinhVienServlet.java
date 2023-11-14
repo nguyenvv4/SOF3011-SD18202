@@ -12,6 +12,8 @@ import java.util.ArrayList;
         "/sinh-vien/hien-thi",
         "/sinh-vien/detail",
         "/sinh-vien/add",
+        "/sinh-vien/delete",
+        "/sinh-vien/update",
 })
 public class SinhVienServlet extends HttpServlet {
     ArrayList<SinhVien> listSinhVien = new ArrayList<>();
@@ -20,6 +22,19 @@ public class SinhVienServlet extends HttpServlet {
     public SinhVienServlet() {
         listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
         listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
+        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
+        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
+        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
+        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
+        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
+        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
+        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
+        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
+        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
+        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
+        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
+        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
+
         dslh.add("SD12345");
         dslh.add("SD12355");
         dslh.add("SD12346");
@@ -45,6 +60,10 @@ public class SinhVienServlet extends HttpServlet {
             request.setAttribute("sinhVien", sinhVienDetail);
             request.setAttribute("dslh", dslh);
             request.getRequestDispatcher("/detail.jsp").forward(request, response);
+        } else if (uri.contains("/delete")) {
+            int vitri = Integer.parseInt(request.getParameter("vitri"));
+            listSinhVien.remove(vitri);
+            response.sendRedirect("/sinh-vien/hien-thi");
         }
     }
 
@@ -63,6 +82,23 @@ public class SinhVienServlet extends HttpServlet {
             // bước 3: add đối tượng vào danh sách
             listSinhVien.add(sinhVien);
             // bước 4 quay lại hiển thị
+            response.sendRedirect("/sinh-vien/hien-thi");
+        } else if (uri.contains("/update")) {
+            String id = request.getParameter("id");
+            String hoTen = request.getParameter("ten");
+            String diaChi = request.getParameter("diaChi");
+            String lop = request.getParameter("lop");
+            String gioiTinh = request.getParameter("gioiTinh");
+            SinhVien sinhVienNew = new SinhVien(id, hoTen, diaChi, gioiTinh, lop);
+            for (SinhVien sinhVien : listSinhVien) {
+                if (sinhVien.getId().equals(id)) {
+                    sinhVien.setLop(lop);
+                    sinhVien.setTen(hoTen);
+                    sinhVien.setGioiTinh(gioiTinh);
+                    sinhVien.setDiaChi(diaChi);
+//                    sinhVien = sinhVienNew;
+                }
+            }
             response.sendRedirect("/sinh-vien/hien-thi");
         }
 
