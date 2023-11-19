@@ -20,20 +20,20 @@ public class SinhVienServlet extends HttpServlet {
     ArrayList<String> dslh = new ArrayList<>();
 
     public SinhVienServlet() {
-        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
-        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
-        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
-        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
-        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
-        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
-        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
-        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
-        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
-        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
-        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
-        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
-        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
-        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
+//        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
+//        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
+//        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
+//        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
+//        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
+//        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
+//        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
+//        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
+//        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
+//        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
+//        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
+//        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
+//        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
+//        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
 
         dslh.add("SD12345");
         dslh.add("SD12355");
@@ -78,9 +78,9 @@ public class SinhVienServlet extends HttpServlet {
             String lop = request.getParameter("lop");
             String gioiTinh = request.getParameter("gioiTinh");
             // bước 2 tạo đối tượng từ thông tin vừa lấy
-            SinhVien sinhVien = new SinhVien(id, hoTen, diaChi, gioiTinh, lop);
+//            SinhVien sinhVien = new SinhVien(id, hoTen, diaChi, gioiTinh, lop);
             // bước 3: add đối tượng vào danh sách
-            listSinhVien.add(sinhVien);
+//            listSinhVien.add(sinhVien);
             // bước 4 quay lại hiển thị
             response.sendRedirect("/sinh-vien/hien-thi");
         } else if (uri.contains("/update")) {
@@ -89,7 +89,7 @@ public class SinhVienServlet extends HttpServlet {
             String diaChi = request.getParameter("diaChi");
             String lop = request.getParameter("lop");
             String gioiTinh = request.getParameter("gioiTinh");
-            SinhVien sinhVienNew = new SinhVien(id, hoTen, diaChi, gioiTinh, lop);
+//            SinhVien sinhVienNew = new SinhVien(id, hoTen, diaChi, gioiTinh, lop);
             for (SinhVien sinhVien : listSinhVien) {
                 if (sinhVien.getId().equals(id)) {
                     sinhVien.setLop(lop);
