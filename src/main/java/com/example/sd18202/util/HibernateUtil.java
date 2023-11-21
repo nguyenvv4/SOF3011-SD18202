@@ -1,6 +1,8 @@
 package com.example.sd18202.util;
 
 
+import com.example.sd18202.model.LopHoc;
+import com.example.sd18202.model.SinhVien;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -23,8 +25,8 @@ public class HibernateUtil {private static final SessionFactory FACTORY;
         properties.put(Environment.SHOW_SQL, "true");
 
         conf.setProperties(properties);
-//        conf.addAnnotatedClass(SinhVien.class);
-//        conf.addAnnotatedClass(LopHoc.class);
+        conf.addAnnotatedClass(SinhVien.class);
+        conf.addAnnotatedClass(LopHoc.class);
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();
         FACTORY = conf.buildSessionFactory(registry);

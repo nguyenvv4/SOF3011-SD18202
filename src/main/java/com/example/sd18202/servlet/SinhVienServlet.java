@@ -1,6 +1,7 @@
 package com.example.sd18202.servlet;
 
 import com.example.sd18202.model.SinhVien;
+import com.example.sd18202.service.SinhVienService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -16,53 +17,38 @@ import java.util.ArrayList;
         "/sinh-vien/update",
 })
 public class SinhVienServlet extends HttpServlet {
-    ArrayList<SinhVien> listSinhVien = new ArrayList<>();
+//    ArrayList<SinhVien> listSinhVien = new ArrayList<>();
+
+    // call service => repo
+
     ArrayList<String> dslh = new ArrayList<>();
 
-    public SinhVienServlet() {
-//        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
-//        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
-//        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
-//        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
-//        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
-//        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
-//        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
-//        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
-//        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
-//        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
-//        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
-//        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
-//        listSinhVien.add(new SinhVien("1", "Nguyen Van A", "Ha Noi", "Nam", "SD12345"));
-//        listSinhVien.add(new SinhVien("2", "Nguyen Van B", "Ha Noi", "Nu", "SD12355"));
-
-        dslh.add("SD12345");
-        dslh.add("SD12355");
-        dslh.add("SD12346");
-        dslh.add("SD12347");
-    }
+    SinhVienService sinhVienService = new SinhVienService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
         System.out.println(uri);
         if (uri.contains("/hien-thi")) {
+            // lấy list sinh viên từ bên service thông qua hàm getList()
+            ArrayList<SinhVien> listSinhVien = sinhVienService.getList();
             request.setAttribute("listSinhVien", listSinhVien);
             request.setAttribute("dslh", dslh);
             request.getRequestDispatcher("/hien-thi-sinh-vien.jsp").forward(request, response);
         } else if (uri.contains("/detail")) {
             String id = request.getParameter("id");
             SinhVien sinhVienDetail = new SinhVien();
-            for (SinhVien sinhVien : listSinhVien) {
-                if (sinhVien.getId().equals(id)) {
-                    sinhVienDetail = sinhVien;
-                }
-            }
+//            for (SinhVien sinhVien : listSinhVien) {
+//                if (sinhVien.getId().equals(id)) {
+//                    sinhVienDetail = sinhVien;
+//                }
+//            }
             request.setAttribute("sinhVien", sinhVienDetail);
             request.setAttribute("dslh", dslh);
             request.getRequestDispatcher("/detail.jsp").forward(request, response);
         } else if (uri.contains("/delete")) {
             int vitri = Integer.parseInt(request.getParameter("vitri"));
-            listSinhVien.remove(vitri);
+//            listSinhVien.remove(vitri);
             response.sendRedirect("/sinh-vien/hien-thi");
         }
     }
@@ -90,15 +76,15 @@ public class SinhVienServlet extends HttpServlet {
             String lop = request.getParameter("lop");
             String gioiTinh = request.getParameter("gioiTinh");
 //            SinhVien sinhVienNew = new SinhVien(id, hoTen, diaChi, gioiTinh, lop);
-            for (SinhVien sinhVien : listSinhVien) {
-                if (sinhVien.getId().equals(id)) {
-                    sinhVien.setLop(lop);
-                    sinhVien.setTen(hoTen);
-                    sinhVien.setGioiTinh(gioiTinh);
-                    sinhVien.setDiaChi(diaChi);
-//                    sinhVien = sinhVienNew;
-                }
-            }
+//            for (SinhVien sinhVien : listSinhVien) {
+//                if (sinhVien.getId().equals(id)) {
+//                    sinhVien.setLop(lop);
+//                    sinhVien.setTen(hoTen);
+//                    sinhVien.setGioiTinh(gioiTinh);
+//                    sinhVien.setDiaChi(diaChi);
+////                    sinhVien = sinhVienNew;
+//                }
+//            }
             response.sendRedirect("/sinh-vien/hien-thi");
         }
 
