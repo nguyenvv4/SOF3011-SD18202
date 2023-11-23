@@ -1,6 +1,8 @@
 package com.example.sd18202.servlet;
 
+import com.example.sd18202.model.LopHoc;
 import com.example.sd18202.model.SinhVien;
+import com.example.sd18202.service.LopHocService;
 import com.example.sd18202.service.SinhVienService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -21,9 +23,9 @@ public class SinhVienServlet extends HttpServlet {
 
     // call service => repo
 
-    ArrayList<String> dslh = new ArrayList<>();
 
     SinhVienService sinhVienService = new SinhVienService();
+    LopHocService lopHocService = new LopHocService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,6 +35,8 @@ public class SinhVienServlet extends HttpServlet {
             // lấy list sinh viên từ bên service thông qua hàm getList()
             ArrayList<SinhVien> listSinhVien = sinhVienService.getList();
             request.setAttribute("listSinhVien", listSinhVien);
+            ArrayList<LopHoc> dslh = lopHocService.getListLopHoc();
+
             request.setAttribute("dslh", dslh);
             request.getRequestDispatcher("/hien-thi-sinh-vien.jsp").forward(request, response);
         } else if (uri.contains("/detail")) {
@@ -44,7 +48,7 @@ public class SinhVienServlet extends HttpServlet {
 //                }
 //            }
             request.setAttribute("sinhVien", sinhVienDetail);
-            request.setAttribute("dslh", dslh);
+//            request.setAttribute("dslh", dslh);
             request.getRequestDispatcher("/detail.jsp").forward(request, response);
         } else if (uri.contains("/delete")) {
             int vitri = Integer.parseInt(request.getParameter("vitri"));
@@ -58,15 +62,20 @@ public class SinhVienServlet extends HttpServlet {
         String uri = request.getRequestURI();
         if (uri.contains("/add")) {
             // bước 1: lấy thông tin trên form xuống
-            String id = request.getParameter("id");
             String hoTen = request.getParameter("hoTen");
             String diaChi = request.getParameter("diaChi");
-            String lop = request.getParameter("lop");
+            Integer lop = Integer.parseInt(request.getParameter("lop"));
             String gioiTinh = request.getParameter("gioiTinh");
             // bước 2 tạo đối tượng từ thông tin vừa lấy
-//            SinhVien sinhVien = new SinhVien(id, hoTen, diaChi, gioiTinh, lop);
+            SinhVien sinhVien = new SinhVien();
+            sinhVien.setDiaChi(diaChi);
+            sinhVien.setTen(hoTen);
+            sinhVien.setGioiTinh(gioiTinh);
+            LopHoc lopHoc = new LopHoc();
+            lopHoc.setId(lop);
+            sinhVien.setLop(lopHoc);
             // bước 3: add đối tượng vào danh sách
-//            listSinhVien.add(sinhVien);
+            sinhVienService.addNew(sinhVien);
             // bước 4 quay lại hiển thị
             response.sendRedirect("/sinh-vien/hien-thi");
         } else if (uri.contains("/update")) {

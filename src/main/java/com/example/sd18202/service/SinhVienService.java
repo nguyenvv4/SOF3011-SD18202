@@ -12,4 +12,8 @@ public class SinhVienService {
         // lấy list sinh viên từ repo
         return sinhVienRepository.getList();
     }
+
+    public  void addNew(SinhVien sinhVien){
+        sinhVienRepository.addNew(sinhVien);
+    }
 }
