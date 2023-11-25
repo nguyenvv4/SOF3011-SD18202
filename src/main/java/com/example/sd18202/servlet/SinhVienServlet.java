@@ -75,21 +75,21 @@ public class SinhVienServlet extends HttpServlet {
             // bước 4 quay lại hiển thị
             response.sendRedirect("/sinh-vien/hien-thi");
         } else if (uri.contains("/update")) {
-            String id = request.getParameter("id");
+            Integer id = Integer.parseInt(request.getParameter("id"));
             String hoTen = request.getParameter("ten");
             String diaChi = request.getParameter("diaChi");
-            String lop = request.getParameter("lop");
+            Integer idLop = Integer.parseInt(request.getParameter("lop"));
+            LopHoc lop = new LopHoc();
+            lop.setId(idLop);
             String gioiTinh = request.getParameter("gioiTinh");
-//            SinhVien sinhVienNew = new SinhVien(id, hoTen, diaChi, gioiTinh, lop);
-//            for (SinhVien sinhVien : listSinhVien) {
-//                if (sinhVien.getId().equals(id)) {
-//                    sinhVien.setLop(lop);
-//                    sinhVien.setTen(hoTen);
-//                    sinhVien.setGioiTinh(gioiTinh);
-//                    sinhVien.setDiaChi(diaChi);
-////                    sinhVien = sinhVienNew;
-//                }
-//            }
+            SinhVien sinhVienNew = new SinhVien();
+//            sinhVienNew.setId(id);
+            sinhVienNew.setLop(lop);
+            sinhVienNew.setTen(hoTen);
+            sinhVienNew.setGioiTinh(gioiTinh);
+            sinhVienNew.setDiaChi(diaChi);
+            // truyen sang service
+            sinhVienService.update(sinhVienNew);
             response.sendRedirect("/sinh-vien/hien-thi");
         }
 

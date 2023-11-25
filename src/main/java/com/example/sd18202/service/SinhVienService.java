@@ -30,4 +30,8 @@ public class SinhVienService {
             sinhVienRepository.delete(sinhVien);
         }
     }
+
+    public void update(SinhVien sinhVien) {
+        sinhVienRepository.update(sinhVien);
+    }
 }
