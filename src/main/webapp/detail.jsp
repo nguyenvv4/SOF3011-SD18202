@@ -33,8 +33,8 @@
         <label class="form-label">Lop</label>
         <select class="form-select" aria-label="Default select example" name="lop">
             <c:forEach items="${dslh}" var="i">
-                <option value="${i}" <c:if test="${sinhVien.lop == i}"> selected</c:if>
-                >${i}</option>
+                <option value="${i.id}" <c:if test="${sinhVien.lop == i.tenLop}"> selected</c:if>
+                >${i.tenLop}</option>
             </c:forEach>
 
         </select>

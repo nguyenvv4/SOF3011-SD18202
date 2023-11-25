@@ -70,25 +70,25 @@
             <td>${sinhVien.gioiTinh}</td>
             <td>${sinhVien.lop.tenLop}</td>
             <td><a href="/sinh-vien/detail?id=${sinhVien.id}" class="btn btn-primary">Detail</a>
-                <a href="/sinh-vien/delete?vitri=${i.index}" class="btn btn-primary">Xoa</a></td>
+                <a href="/sinh-vien/delete?id=${sinhVien.id}" class="btn btn-primary">Xoa</a></td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
 
-<div class="row">
-    <c:forEach varStatus="i" items="${listSinhVien}" var="sinhVien">
-        <div class="col-md-3">
-            <div class="thumbnail">
-                <a href="/w3images/lights.jpg">
-                    <img src="https://product.hstatic.net/1000253775/product/7_0dc9fb936e3c477eaa7ead5ff5f933eb_grande.jpg" alt="Lights" style="width:100%">
-                    <div class="caption">
-                        <p>${sinhVien.ten}</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </c:forEach>
-</div>
+<%--<div class="row">--%>
+<%--    <c:forEach varStatus="i" items="${listSinhVien}" var="sinhVien">--%>
+<%--        <div class="col-md-3">--%>
+<%--            <div class="thumbnail">--%>
+<%--                <a href="/w3images/lights.jpg">--%>
+<%--                    <img src="https://product.hstatic.net/1000253775/product/7_0dc9fb936e3c477eaa7ead5ff5f933eb_grande.jpg" alt="Lights" style="width:100%">--%>
+<%--                    <div class="caption">--%>
+<%--                        <p>${sinhVien.ten}</p>--%>
+<%--                    </div>--%>
+<%--                </a>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </c:forEach>--%>
+<%--</div>--%>
 </body>
 </html>

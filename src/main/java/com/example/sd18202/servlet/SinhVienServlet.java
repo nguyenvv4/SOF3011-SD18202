@@ -31,28 +31,24 @@ public class SinhVienServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
         System.out.println(uri);
+        ArrayList<LopHoc> dslh = lopHocService.getListLopHoc();
         if (uri.contains("/hien-thi")) {
             // lấy list sinh viên từ bên service thông qua hàm getList()
             ArrayList<SinhVien> listSinhVien = sinhVienService.getList();
             request.setAttribute("listSinhVien", listSinhVien);
-            ArrayList<LopHoc> dslh = lopHocService.getListLopHoc();
-
             request.setAttribute("dslh", dslh);
             request.getRequestDispatcher("/hien-thi-sinh-vien.jsp").forward(request, response);
         } else if (uri.contains("/detail")) {
-            String id = request.getParameter("id");
-            SinhVien sinhVienDetail = new SinhVien();
-//            for (SinhVien sinhVien : listSinhVien) {
-//                if (sinhVien.getId().equals(id)) {
-//                    sinhVienDetail = sinhVien;
-//                }
-//            }
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            // truyen id sang service
+            SinhVien sinhVienDetail = sinhVienService.getById(id);
+
             request.setAttribute("sinhVien", sinhVienDetail);
-//            request.setAttribute("dslh", dslh);
+            request.setAttribute("dslh", dslh);
             request.getRequestDispatcher("/detail.jsp").forward(request, response);
         } else if (uri.contains("/delete")) {
-            int vitri = Integer.parseInt(request.getParameter("vitri"));
-//            listSinhVien.remove(vitri);
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            sinhVienService.delete(id);
             response.sendRedirect("/sinh-vien/hien-thi");
         }
     }
