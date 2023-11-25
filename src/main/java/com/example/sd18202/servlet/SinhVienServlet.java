@@ -83,7 +83,7 @@ public class SinhVienServlet extends HttpServlet {
             lop.setId(idLop);
             String gioiTinh = request.getParameter("gioiTinh");
             SinhVien sinhVienNew = new SinhVien();
-//            sinhVienNew.setId(id);
+            sinhVienNew.setId(id);
             sinhVienNew.setLop(lop);
             sinhVienNew.setTen(hoTen);
             sinhVienNew.setGioiTinh(gioiTinh);
