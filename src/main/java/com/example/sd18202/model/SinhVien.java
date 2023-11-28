@@ -38,4 +38,11 @@ public class SinhVien {
     private String canNang;
 
 
+    public void copyProperties(SinhVienViewModel sinhVienViewModel) {
+        this.ten = sinhVienViewModel.getHoTen();
+        this.diaChi = sinhVienViewModel.getDiaChi();
+        this.lop = new LopHoc(sinhVienViewModel.getLop(),
+                "");
+        this.gioiTinh = sinhVienViewModel.getGioiTinh();
+    }
 }

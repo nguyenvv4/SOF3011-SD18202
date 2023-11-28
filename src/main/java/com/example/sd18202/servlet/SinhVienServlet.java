@@ -2,13 +2,16 @@ package com.example.sd18202.servlet;
 
 import com.example.sd18202.model.LopHoc;
 import com.example.sd18202.model.SinhVien;
+import com.example.sd18202.model.SinhVienViewModel;
 import com.example.sd18202.service.LopHocService;
 import com.example.sd18202.service.SinhVienService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.apache.commons.beanutils.BeanUtils;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 @WebServlet(name = "SinhVienServlet", value = {
@@ -58,18 +61,18 @@ public class SinhVienServlet extends HttpServlet {
         String uri = request.getRequestURI();
         if (uri.contains("/add")) {
             // bước 1: lấy thông tin trên form xuống
-            String hoTen = request.getParameter("hoTen");
-            String diaChi = request.getParameter("diaChi");
-            Integer lop = Integer.parseInt(request.getParameter("lop"));
-            String gioiTinh = request.getParameter("gioiTinh");
+            SinhVienViewModel sinhVienViewModel = new SinhVienViewModel();
+            try {
+                BeanUtils.populate(sinhVienViewModel, request.getParameterMap());
+                System.out.println(sinhVienViewModel.toString());
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            } catch (InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
             // bước 2 tạo đối tượng từ thông tin vừa lấy
             SinhVien sinhVien = new SinhVien();
-            sinhVien.setDiaChi(diaChi);
-            sinhVien.setTen(hoTen);
-            sinhVien.setGioiTinh(gioiTinh);
-            LopHoc lopHoc = new LopHoc();
-            lopHoc.setId(lop);
-            sinhVien.setLop(lopHoc);
+            sinhVien.copyProperties(sinhVienViewModel);
             // bước 3: add đối tượng vào danh sách
             sinhVienService.addNew(sinhVien);
             // bước 4 quay lại hiển thị
